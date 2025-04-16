@@ -1,6 +1,7 @@
 import { Slider } from "./components/Slider";
 import { Thumbnails } from "./components/Thumbnails";
 
+// TODO: To be injected:
 const items = [
   {
     id: "pic-1",

@@ -55,6 +55,7 @@ export class Thumbnails {
     const { width, height, useBorder, borderWidth, borderColor } = this.props.thumbs;
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
+    // TODO: Create a css file for it:
     await this.stylesheet.replace(`
       .thumbnail-container {
         width: 100%;

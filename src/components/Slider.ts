@@ -34,12 +34,14 @@ export class Slider {
     const leftNav = document.createElement("button");
     leftNav.classList.add("nav", "left");
     leftNav.textContent = "<";
+    // TODO: Should navigate left:
     leftNav.addEventListener("click", () => this.handleNavClick());
     this._element.append(leftNav);
 
     const rightNav = document.createElement("button");
     rightNav.classList.add("nav", "right");
     rightNav.textContent = ">";
+    // TODO: Should navigate right:
     rightNav.addEventListener("click", () => this.handleNavClick());
     this._element.append(rightNav);
   }
@@ -59,16 +61,6 @@ export class Slider {
 
   private updateSliderPosition() {
     const width = this._element.clientWidth;
-
-    console.log(
-      "currentIndex:",
-      this.currentIndex,
-      "width:",
-      width,
-      "x:",
-      this.currentIndex * width,
-      `translateX(${width * this.currentIndex}px);`
-    );
 
     this.list.style.transform = `translateX(${width * this.currentIndex * -1}px)`;
   }
