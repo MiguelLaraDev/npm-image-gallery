@@ -18,7 +18,7 @@ class ImageGallery {
     const container = document.createElement("div");
     container.style.border = "thin solid red";
     container.style.width = "100%";
-    container.style.height = "500px";
+    container.style.height = "auto";
 
     const large = new MainImage();
     const thumbs = new Thumbnails();
@@ -27,6 +27,27 @@ class ImageGallery {
     container.append(thumbs.element);
 
     document.body.appendChild(container);
+
+    thumbs.items = [
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c",
+    ];
   }
 }
 
