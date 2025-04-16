@@ -1,5 +1,23 @@
-import { MainImage } from "./components/MainImage";
+import { Slider } from "./components/Slider";
 import { Thumbnails } from "./components/Thumbnails";
+
+const items = [
+  {
+    id: "pic-1",
+    alt: "Example pic",
+    src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+  },
+  {
+    id: "pic-2",
+    alt: "Example pic",
+    src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+  },
+  {
+    id: "pic-3",
+    alt: "Example pic",
+    src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+  },
+];
 
 export interface ThumbnailClickEvent extends CustomEvent {
   detail: {
@@ -9,7 +27,7 @@ export interface ThumbnailClickEvent extends CustomEvent {
 
 class ImageGallery {
   private element: HTMLElement;
-  private image = new MainImage();
+  private slider = new Slider();
   private thumbs = new Thumbnails();
 
   constructor(selector: string) {
@@ -28,28 +46,13 @@ class ImageGallery {
     container.style.width = "100%";
     container.style.height = "auto";
 
-    container.append(this.image.element);
+    container.append(this.slider.element);
     container.append(this.thumbs.element);
 
     document.body.appendChild(container);
 
-    this.thumbs.items = [
-      {
-        id: "pic-1",
-        alt: "Example pic",
-        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
-      },
-      {
-        id: "pic-2",
-        alt: "Example pic",
-        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
-      },
-      {
-        id: "pic-3",
-        alt: "Example pic",
-        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
-      },
-    ];
+    this.slider.items = items;
+    this.thumbs.items = items;
   }
 }
 

@@ -10,7 +10,7 @@ interface ThumbnailsProps {
   };
 }
 
-type ThumbnailItem = {
+export type ThumbnailItem = {
   id: string;
   alt: string;
   src: string;
