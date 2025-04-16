@@ -1,4 +1,5 @@
 import { MainImage } from "./components/MainImage";
+import { Thumbnails } from "./components/Thumbnails";
 
 class ImageGallery {
   private element: HTMLElement;
@@ -14,20 +15,15 @@ class ImageGallery {
   }
 
   private init() {
-    const mainContainer = document.createElement("div");
-    mainContainer.style.border = "thin solid red";
-    mainContainer.style.width = "100%";
-    mainContainer.style.height = "500px";
+    const container = document.createElement("div");
+    container.style.border = "thin solid red";
+    container.style.width = "100%";
+    container.style.height = "500px";
 
-    const mainImage = new MainImage(mainContainer);
+    new MainImage(container);
+    new Thumbnails(container);
 
-    const thumbsContainer = document.createElement("div");
-    thumbsContainer.style.border = "thin solid blue";
-    thumbsContainer.style.width = "100%";
-    thumbsContainer.style.height = "100px";
-
-    mainContainer.appendChild(thumbsContainer);
-    document.body.appendChild(mainContainer);
+    document.body.appendChild(container);
   }
 }
 
