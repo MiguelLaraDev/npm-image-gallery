@@ -7,14 +7,21 @@ export class Slider {
   private _items: ThumbnailItem[] = [];
 
   private currentIndex = 0;
+  private list: HTMLDivElement;
 
   constructor() {
     this._element = document.createElement("div");
+    this.list = document.createElement("div");
+
     this.init();
   }
 
   private init() {
     this._element.classList.add("slider");
+
+    this.list.classList.add("list");
+    this._element.append(this.list);
+
     this.addNavigation();
 
     document.addEventListener("thumbnailClick", (e: Event) => {
@@ -53,9 +60,17 @@ export class Slider {
   private updateSliderPosition() {
     const width = this._element.clientWidth;
 
-    console.log("update to:", this.currentIndex, width, this.currentIndex * width);
+    console.log(
+      "currentIndex:",
+      this.currentIndex,
+      "width:",
+      width,
+      "x:",
+      this.currentIndex * width,
+      `translateX(${width * this.currentIndex}px);`
+    );
 
-    this._element.style.transform = `translateX(${width * this.currentIndex}px)`;
+    this.list.style.transform = `translateX(${width * this.currentIndex * -1}px)`;
   }
 
   private updateImage(itemId: string) {
@@ -73,7 +88,7 @@ export class Slider {
       slide.classList.add("slide");
       slide.append(image);
 
-      this._element.append(slide);
+      this.list.append(slide);
     });
   }
 
