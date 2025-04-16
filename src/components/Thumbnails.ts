@@ -1,10 +1,8 @@
 export class Thumbnails {
-  private element: HTMLDivElement;
-  private container: HTMLElement;
+  private _element: HTMLDivElement;
 
-  constructor(container: HTMLElement) {
-    this.element = document.createElement("div");
-    this.container = container;
+  constructor() {
+    this._element = document.createElement("div");
 
     this.init();
   }
@@ -13,7 +11,9 @@ export class Thumbnails {
     this.element.style.border = "thin solid blue";
     this.element.style.width = "100%";
     this.element.style.height = "100px";
+  }
 
-    this.container.appendChild(this.element);
+  get element(): HTMLDivElement {
+    return this._element;
   }
 }

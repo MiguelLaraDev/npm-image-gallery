@@ -1,19 +1,18 @@
 export class MainImage {
-  private element: HTMLDivElement;
-  private container: HTMLElement;
+  private _element: HTMLDivElement;
 
-  constructor(container: HTMLElement) {
-    this.element = document.createElement("div");
-    this.container = container;
-
+  constructor() {
+    this._element = document.createElement("div");
     this.init();
   }
 
   private init() {
-    this.element.style.border = "thin solid green";
-    this.element.style.width = "100%";
-    this.element.style.height = "400px";
+    this._element.style.border = "thin solid green";
+    this._element.style.width = "100%";
+    this._element.style.height = "400px";
+  }
 
-    this.container.appendChild(this.element);
+  get element(): HTMLDivElement {
+    return this._element;
   }
 }

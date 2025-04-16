@@ -20,8 +20,11 @@ class ImageGallery {
     container.style.width = "100%";
     container.style.height = "500px";
 
-    new MainImage(container);
-    new Thumbnails(container);
+    const large = new MainImage();
+    const thumbs = new Thumbnails();
+
+    container.append(large.element);
+    container.append(thumbs.element);
 
     document.body.appendChild(container);
   }
