@@ -16,7 +16,7 @@ class ImageGallery {
 
   private init() {
     const container = document.createElement("div");
-    container.style.border = "thin solid red";
+    container.style.background = "#f3f3f3";
     container.style.width = "100%";
     container.style.height = "auto";
 
@@ -29,24 +29,21 @@ class ImageGallery {
     document.body.appendChild(container);
 
     thumbs.items = [
-      "a",
-      "b",
-      "c",
-      "a",
-      "b",
-      "c",
-      "a",
-      "b",
-      "c",
-      "a",
-      "b",
-      "c",
-      "a",
-      "b",
-      "c",
-      "a",
-      "b",
-      "c",
+      {
+        id: "pic-1",
+        alt: "Example pic",
+        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+      },
+      {
+        id: "pic-2",
+        alt: "Example pic",
+        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+      },
+      {
+        id: "pic-3",
+        alt: "Example pic",
+        src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
+      },
     ];
   }
 }

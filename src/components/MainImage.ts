@@ -7,7 +7,6 @@ export class MainImage {
   }
 
   private init() {
-    this._element.style.border = "thin solid green";
     this._element.style.width = "100%";
     this._element.style.height = "400px";
   }
