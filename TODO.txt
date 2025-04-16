@@ -1,0 +1,6 @@
+
+1.
+Create the large image container.
+
+Create the thumbs container.
+Create a list with clickeable thumbs.
