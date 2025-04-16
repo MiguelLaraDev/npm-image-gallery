@@ -1,8 +1,16 @@
 import { MainImage } from "./components/MainImage";
 import { Thumbnails } from "./components/Thumbnails";
 
+export interface ThumbnailClickEvent extends CustomEvent {
+  detail: {
+    id: string;
+  };
+}
+
 class ImageGallery {
   private element: HTMLElement;
+  private image = new MainImage();
+  private thumbs = new Thumbnails();
 
   constructor(selector: string) {
     this.element = document.querySelector(selector) as HTMLElement;
@@ -20,15 +28,12 @@ class ImageGallery {
     container.style.width = "100%";
     container.style.height = "auto";
 
-    const large = new MainImage();
-    const thumbs = new Thumbnails();
-
-    container.append(large.element);
-    container.append(thumbs.element);
+    container.append(this.image.element);
+    container.append(this.thumbs.element);
 
     document.body.appendChild(container);
 
-    thumbs.items = [
+    this.thumbs.items = [
       {
         id: "pic-1",
         alt: "Example pic",

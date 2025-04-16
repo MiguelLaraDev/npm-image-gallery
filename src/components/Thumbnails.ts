@@ -1,3 +1,5 @@
+import type { ThumbnailClickEvent } from "..";
+
 interface ThumbnailsProps {
   thumbs: {
     borderColor?: string;
@@ -109,6 +111,13 @@ export class Thumbnails {
 
     const next = this._element.querySelector(`#${nextSelected}`);
     next?.classList.add("selected");
+
+    const event: ThumbnailClickEvent = new CustomEvent("thumbnailClick", {
+      detail: { id: nextSelected },
+      bubbles: true,
+    });
+
+    document.dispatchEvent(event);
   }
 
   get element(): HTMLDivElement {
