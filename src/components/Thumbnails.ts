@@ -43,6 +43,11 @@ export class Thumbnails {
       ...props,
     };
 
+    document.addEventListener("navClick", (e: Event) => {
+      const event = e as ThumbnailClickEvent;
+      this.handleThumbClick(event.detail.id);
+    });
+
     this.init();
   }
 

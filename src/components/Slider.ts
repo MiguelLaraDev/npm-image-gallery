@@ -1,10 +1,12 @@
-import type { ThumbnailClickEvent } from "..";
+import type { NavClickEvent, ThumbnailClickEvent } from "..";
 import "../styles/slider.css";
 import type { ThumbnailItem } from "./Thumbnails";
 
 export class Slider {
   private _element: HTMLDivElement;
   private _items: ThumbnailItem[] = [];
+
+  private currentIndex = 0;
 
   constructor() {
     this._element = document.createElement("div");
@@ -36,26 +38,28 @@ export class Slider {
   }
 
   private handleNavClick() {
-    const current = 0; // TODO: Set it as a class member.
+    this.currentIndex === this._items.length - 1 ? (this.currentIndex = 0) : this.currentIndex++;
 
-    console.log(current + 1, this._items.length);
-
-    const nextIndex = current + 1 === this._items.length ? 0 : current + 1;
-    const nextSelected = this._items[nextIndex].id;
-
-    // TODO: Create a Navigation event.
-    const event: ThumbnailClickEvent = new CustomEvent("thumbnailClick", {
-      detail: { id: nextSelected },
+    const event: NavClickEvent = new CustomEvent("navClick", {
+      detail: { id: this._items[this.currentIndex].id },
       bubbles: true,
     });
 
     document.dispatchEvent(event);
 
-    // TODO: move the slider x position...
+    this.updateSliderPosition();
+  }
+
+  private updateSliderPosition() {
+    const width = this._element.clientWidth;
+
+    console.log("update to:", this.currentIndex, width, this.currentIndex * width);
+
+    this._element.style.transform = `translateX(${width * this.currentIndex}px)`;
   }
 
   private updateImage(itemId: string) {
-    console.log(itemId);
+    // this.updateSliderPosition();
   }
 
   private onItemsChange() {

@@ -25,6 +25,12 @@ export interface ThumbnailClickEvent extends CustomEvent {
   };
 }
 
+export interface NavClickEvent extends CustomEvent {
+  detail: {
+    id: string;
+  };
+}
+
 class ImageGallery {
   private element: HTMLElement;
   private slider = new Slider();
