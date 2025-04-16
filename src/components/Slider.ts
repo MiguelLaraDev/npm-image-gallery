@@ -13,6 +13,7 @@ export class Slider {
 
   private init() {
     this._element.classList.add("slider");
+    this.addNavigation();
 
     document.addEventListener("thumbnailClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;
@@ -20,20 +21,56 @@ export class Slider {
     });
   }
 
+  private addNavigation() {
+    const leftNav = document.createElement("button");
+    leftNav.classList.add("nav", "left");
+    leftNav.textContent = "<";
+    leftNav.addEventListener("click", () => this.handleNavClick());
+    this._element.append(leftNav);
+
+    const rightNav = document.createElement("button");
+    rightNav.classList.add("nav", "right");
+    rightNav.textContent = ">";
+    rightNav.addEventListener("click", () => this.handleNavClick());
+    this._element.append(rightNav);
+  }
+
+  private handleNavClick() {
+    const current = 0; // TODO: Set it as a class member.
+
+    console.log(current + 1, this._items.length);
+
+    const nextIndex = current + 1 === this._items.length ? 0 : current + 1;
+    const nextSelected = this._items[nextIndex].id;
+
+    // TODO: Create a Navigation event.
+    const event: ThumbnailClickEvent = new CustomEvent("thumbnailClick", {
+      detail: { id: nextSelected },
+      bubbles: true,
+    });
+
+    document.dispatchEvent(event);
+
+    // TODO: move the slider x position...
+  }
+
   private updateImage(itemId: string) {
     console.log(itemId);
   }
 
   private onItemsChange() {
-    const image = document.createElement("img");
-    image.src = this._items?.[0].src;
-    image.alt = this._items?.[0].alt;
+    this._items?.forEach((item) => {
+      const image = document.createElement("img");
+      image.src = item.src;
+      image.alt = item.alt;
 
-    const wrapper = document.createElement("div");
-    wrapper.id = `large-image-${this._items?.[0].id}`;
-    wrapper.append(image);
+      const slide = document.createElement("div");
+      slide.id = `slide-${item.id}`;
+      slide.classList.add("slide");
+      slide.append(image);
 
-    this._element.append(wrapper);
+      this._element.append(slide);
+    });
   }
 
   get element(): HTMLDivElement {
