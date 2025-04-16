@@ -1,4 +1,5 @@
 import type { ThumbnailClickEvent } from "..";
+import "../styles/slider.css";
 import type { ThumbnailItem } from "./Thumbnails";
 
 export class Slider {
@@ -11,8 +12,7 @@ export class Slider {
   }
 
   private init() {
-    this._element.style.width = "100%";
-    this._element.style.height = "400px";
+    this._element.classList.add("slider");
 
     document.addEventListener("thumbnailClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;

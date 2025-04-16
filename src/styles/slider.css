@@ -1,0 +1,10 @@
+.slider {
+  background-color: white;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
