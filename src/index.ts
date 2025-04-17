@@ -1,24 +1,5 @@
 import { Slider } from "./components/Slider";
-import { Thumbnails } from "./components/Thumbnails";
-
-// TODO: To be injected:
-const items = [
-  {
-    id: "pic-1",
-    alt: "Example pic",
-    src: "https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/428224.webp",
-  },
-  {
-    id: "pic-2",
-    alt: "Example pic",
-    src: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/_42/428224/17111548_800.jpg",
-  },
-  {
-    id: "pic-3",
-    alt: "Example pic",
-    src: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/_42/428224/17105808_800.jpg",
-  },
-];
+import { Thumbnails, type ThumbnailItem } from "./components/Thumbnails";
 
 export interface ThumbnailClickEvent extends CustomEvent {
   detail: {
@@ -36,9 +17,11 @@ class ImageGallery {
   private element: HTMLElement;
   private slider = new Slider();
   private thumbs = new Thumbnails();
+  private items: ThumbnailItem[] = [];
 
-  constructor(selector: string) {
+  constructor(selector: string, items: ThumbnailItem[]) {
     this.element = document.querySelector(selector) as HTMLElement;
+    this.items = items;
 
     if (!this.element) {
       throw new Error(`Element with selector "${selector}" not found`);
@@ -57,8 +40,8 @@ class ImageGallery {
 
     document.body.appendChild(container);
 
-    this.slider.items = items;
-    this.thumbs.items = items;
+    this.slider.items = this.items;
+    this.thumbs.items = this.items;
   }
 }
 
