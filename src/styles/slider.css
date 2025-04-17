@@ -39,7 +39,7 @@
 
 .nav {
   position: absolute;
-  background-color: violet;
+  background-color: rgba(238, 130, 238, 0.5);
   color: black;
   top: calc(50% - 28px);
   width: 56px;

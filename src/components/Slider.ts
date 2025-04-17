@@ -1,4 +1,6 @@
 import type { NavClickEvent, ThumbnailClickEvent } from "..";
+import chevronLeft from "../assets/chevron-left.svg?raw";
+import chevronRight from "../assets/chevron-right.svg?raw";
 import "../styles/slider.css";
 import type { ThumbnailItem } from "./Thumbnails";
 
@@ -33,14 +35,15 @@ export class Slider {
   private addNavigation() {
     const left = document.createElement("button");
     left.classList.add("nav", "left");
-    left.textContent = "<";
+    left.innerHTML = chevronLeft;
     left.addEventListener("click", () => this.handleNavClick("left"));
-    this._element.append(left);
 
     const right = document.createElement("button");
     right.classList.add("nav", "right");
-    right.textContent = ">";
+    right.innerHTML = chevronRight;
     right.addEventListener("click", () => this.handleNavClick("right"));
+
+    this._element.append(left);
     this._element.append(right);
   }
 

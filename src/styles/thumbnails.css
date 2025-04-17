@@ -23,9 +23,5 @@
 }
 
 .selected {
-  border-top: 4px solid red !important;
-}
-
-button:disabled {
-  background-color: grey !important;
+  border-top: 4px solid rgb(238, 130, 238) !important;
 }
