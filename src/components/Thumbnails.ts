@@ -1,4 +1,5 @@
 import type { ThumbnailClickEvent } from "..";
+import "../styles/thumbnails.css";
 
 interface ThumbnailsProps {
   thumbs: {
@@ -55,37 +56,11 @@ export class Thumbnails {
     const { width, height, useBorder, borderWidth, borderColor } = this.props.thumbs;
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
-    // TODO: Create a css file for it:
     await this.stylesheet.replace(`
-      .thumbnail-container {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-     
-      .thumb {
-        box-sizing: border-box;
+      .custom-thumb {
         border: ${border};
         width: ${width}px;
         height: ${height}px;
-        overflow: hidden;
-        cursor: pointer;
-      }
-
-      .thumb:hover {
-        opacity: 0.5;
-      }
-
-      .thumb img {
-        width: ${width}px;
-        height: ${height}px;
-        object-fit: cover;
-      }
-
-      .selected {
-        border-top: 4px solid red;
       }
     `);
 
@@ -101,7 +76,7 @@ export class Thumbnails {
 
       const thumb = document.createElement("div");
       thumb.id = item.id;
-      thumb.className = "thumb";
+      thumb.classList.add("thumb", "custom-thumb");
       thumb.append(image);
       thumb.addEventListener("click", () => this.handleThumbClick(item.id));
 
