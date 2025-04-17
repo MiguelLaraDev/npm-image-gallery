@@ -31,32 +31,34 @@ export class Slider {
   }
 
   private addNavigation() {
-    const leftNav = document.createElement("button");
-    leftNav.classList.add("nav", "left");
-    leftNav.textContent = "<";
-    // TODO: Should navigate left:
-    leftNav.addEventListener("click", () => this.handleNavClick());
-    this._element.append(leftNav);
+    const left = document.createElement("button");
+    left.classList.add("nav", "left");
+    left.textContent = "<";
+    left.addEventListener("click", () => this.handleNavClick("left"));
+    this._element.append(left);
 
-    const rightNav = document.createElement("button");
-    rightNav.classList.add("nav", "right");
-    rightNav.textContent = ">";
-    // TODO: Should navigate right:
-    rightNav.addEventListener("click", () => this.handleNavClick());
-    this._element.append(rightNav);
+    const right = document.createElement("button");
+    right.classList.add("nav", "right");
+    right.textContent = ">";
+    right.addEventListener("click", () => this.handleNavClick("right"));
+    this._element.append(right);
   }
 
-  private handleNavClick() {
-    this.currentIndex === this._items.length - 1 ? (this.currentIndex = 0) : this.currentIndex++;
+  private handleNavClick(direction: "left" | "right") {
+    this.currentIndex += direction === "right" ? 1 : -1;
+    this.currentIndex = (this.currentIndex + this._items.length) % this._items.length;
 
+    this.updateSliderPosition();
+    this.dispatchNavEvent();
+  }
+
+  private dispatchNavEvent() {
     const event: NavClickEvent = new CustomEvent("navClick", {
       detail: { id: this._items[this.currentIndex].id },
       bubbles: true,
     });
 
     document.dispatchEvent(event);
-
-    this.updateSliderPosition();
   }
 
   private updateSliderPosition() {
