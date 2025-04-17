@@ -1,6 +1,13 @@
 
-1.
-Create the large image container.
 
-Create the thumbs container.
-Create a list with clickeable thumbs.
+Try applying styles from outside.
+
+Add a large image.
+
+Adapt to mobile.
+
+Export and upload the npm package.
+
+Update the readme.
+
+Install from npm into a fresh project.
