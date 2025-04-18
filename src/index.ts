@@ -14,34 +14,34 @@ export interface NavClickEvent extends CustomEvent {
 }
 
 class ImageGallery {
-  private element: HTMLElement;
-  private slider = new Slider();
-  private thumbs = new Thumbnails();
-  private items: ThumbnailItem[] = [];
+  #element: HTMLElement;
+  #slider = new Slider();
+  #thumbs = new Thumbnails();
+  #items: ThumbnailItem[] = [];
 
   constructor(selector: string, items: ThumbnailItem[]) {
-    this.element = document.querySelector(selector) as HTMLElement;
-    this.items = items;
+    this.#element = document.querySelector(selector) as HTMLElement;
+    this.#items = items;
 
-    if (!this.element) {
+    if (!this.#element) {
       throw new Error(`Element with selector "${selector}" not found`);
     }
 
-    this.init();
+    this.#init();
   }
 
-  private init() {
+  #init() {
     const container = document.createElement("div");
     container.style.width = "100%";
     container.style.height = "auto";
 
-    container.append(this.slider.element);
-    container.append(this.thumbs.element);
+    container.append(this.#slider.element);
+    container.append(this.#thumbs.element);
 
     document.body.appendChild(container);
 
-    this.slider.items = this.items;
-    this.thumbs.items = this.items;
+    this.#slider.items = this.#items;
+    this.#thumbs.items = this.#items;
   }
 }
 

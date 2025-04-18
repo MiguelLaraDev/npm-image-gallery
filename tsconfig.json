@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES2022",
+    "lib": ["DOM", "ES2022"],
     "module": "ESNext",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -10,8 +11,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
-    "sourceMap": true,
-    "lib": ["DOM", "ES6"]
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "demo"]

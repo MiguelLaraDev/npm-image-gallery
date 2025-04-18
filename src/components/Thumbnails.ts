@@ -28,35 +28,34 @@ const defaultProps: ThumbnailsProps = {
 };
 
 export class Thumbnails {
-  private _element: HTMLDivElement;
-  private _items: ThumbnailItem[] = [];
-
-  private stylesheet: CSSStyleSheet;
-  private props: ThumbnailsProps;
+  #element: HTMLDivElement;
+  #items: ThumbnailItem[] = [];
+  #props: ThumbnailsProps;
+  #stylesheet: CSSStyleSheet;
 
   constructor(props?: ThumbnailsProps) {
-    this._element = document.createElement("div");
-    this._element.className = "thumbnail-container";
+    this.#element = document.createElement("div");
+    this.#element.className = "thumbnail-container";
 
-    this.stylesheet = new CSSStyleSheet();
-    this.props = {
+    this.#stylesheet = new CSSStyleSheet();
+    this.#props = {
       ...defaultProps,
       ...props,
     };
 
     document.addEventListener("navClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;
-      this.handleThumbClick(event.detail.id);
+      this.#handleThumbClick(event.detail.id);
     });
 
-    this.init();
+    this.#init();
   }
 
-  private async init() {
-    const { width, height, useBorder, borderWidth, borderColor } = this.props.thumbs;
+  async #init() {
+    const { width, height, useBorder, borderWidth, borderColor } = this.#props.thumbs;
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
-    await this.stylesheet.replace(`
+    await this.#stylesheet.replace(`
       .custom-thumb {
         border: ${border};
         width: ${width}px;
@@ -64,13 +63,12 @@ export class Thumbnails {
       }
     `);
 
-    document.adoptedStyleSheets = [...document.adoptedStyleSheets, this.stylesheet];
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, this.#stylesheet];
   }
 
-  private onItemsChange() {
-    this._element.innerHTML = "";
-
-    this._items.forEach((item, index) => {
+  #onItemsChange() {
+    this.#element.innerHTML = "";
+    this.#items.forEach((item, index) => {
       const image = document.createElement("img");
       image.src = item.src;
 
@@ -78,19 +76,19 @@ export class Thumbnails {
       thumb.id = item.id;
       thumb.classList.add("thumb", "custom-thumb");
       thumb.append(image);
-      thumb.addEventListener("click", () => this.handleThumbClick(item.id));
+      thumb.addEventListener("click", () => this.#handleThumbClick(item.id));
 
       if (index === 0) thumb.classList.add("selected");
 
-      this._element.appendChild(thumb);
+      this.#element.appendChild(thumb);
     });
   }
 
-  private handleThumbClick(nextSelected: string) {
-    const current = this._element.querySelector(".selected");
+  #handleThumbClick(nextSelected: string) {
+    const current = this.#element.querySelector(".selected");
     current?.classList.remove("selected");
 
-    const next = this._element.querySelector(`#${nextSelected}`);
+    const next = this.#element.querySelector(`#${nextSelected}`);
     next?.classList.add("selected");
 
     const event: ThumbnailClickEvent = new CustomEvent("thumbnailClick", {
@@ -102,11 +100,11 @@ export class Thumbnails {
   }
 
   get element(): HTMLDivElement {
-    return this._element;
+    return this.#element;
   }
 
   set items(injectedItems: ThumbnailItem[]) {
-    this._items = injectedItems;
-    this.onItemsChange();
+    this.#items = injectedItems;
+    this.#onItemsChange();
   }
 }

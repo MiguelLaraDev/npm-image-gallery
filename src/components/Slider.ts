@@ -5,96 +5,96 @@ import "../styles/slider.css";
 import type { ThumbnailItem } from "./Thumbnails";
 
 export class Slider {
-  private _element: HTMLDivElement;
-  private _items: ThumbnailItem[] = [];
-
-  private currentIndex = 0;
-  private list: HTMLDivElement;
+  #currentIndex = 0;
+  #element: HTMLDivElement;
+  #items: ThumbnailItem[] = [];
+  #list: HTMLDivElement;
 
   constructor() {
-    this._element = document.createElement("div");
-    this.list = document.createElement("div");
+    this.#element = document.createElement("div");
+    this.#list = document.createElement("div");
 
-    this.init();
+    this.#init();
   }
 
-  private init() {
-    this._element.classList.add("slider");
+  #init() {
+    this.#element.classList.add("slider");
 
-    this.list.classList.add("list");
-    this._element.append(this.list);
+    this.#list.classList.add("list");
+    this.#element.append(this.#list);
 
-    this.addNavigation();
+    this.#addNavigation();
 
     document.addEventListener("thumbnailClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;
-      this.updateImage(event.detail.id);
+      this.#updateImage(event.detail.id);
     });
   }
 
-  private addNavigation() {
+  #addNavigation() {
     const left = document.createElement("button");
     left.classList.add("nav", "left");
     left.innerHTML = chevronLeft;
-    left.addEventListener("click", () => this.handleNavClick("left"));
+    left.addEventListener("click", () => this.#handleNavClick("left"));
 
     const right = document.createElement("button");
     right.classList.add("nav", "right");
     right.innerHTML = chevronRight;
-    right.addEventListener("click", () => this.handleNavClick("right"));
+    right.addEventListener("click", () => this.#handleNavClick("right"));
 
-    this._element.append(left);
-    this._element.append(right);
+    this.#element.append(left);
+    this.#element.append(right);
   }
 
-  private handleNavClick(direction: "left" | "right") {
-    this.currentIndex += direction === "right" ? 1 : -1;
-    this.currentIndex = (this.currentIndex + this._items.length) % this._items.length;
+  #handleNavClick(direction: "left" | "right") {
+    this.#currentIndex += direction === "right" ? 1 : -1;
+    this.#currentIndex = (this.#currentIndex + this.#items.length) % this.#items.length;
 
-    this.updateSliderPosition();
-    this.dispatchNavEvent();
+    this.#updateSliderPosition();
+    this.#dispatchNavEvent();
   }
 
-  private dispatchNavEvent() {
+  #dispatchNavEvent() {
+    if (!this.#items.length) return;
+
     const event: NavClickEvent = new CustomEvent("navClick", {
-      detail: { id: this._items[this.currentIndex].id },
+      detail: { id: this.#items[this.#currentIndex].id },
       bubbles: true,
     });
 
     document.dispatchEvent(event);
   }
 
-  private updateSliderPosition() {
-    const width = this._element.clientWidth;
-
-    this.list.style.transform = `translateX(${width * this.currentIndex * -1}px)`;
+  #updateSliderPosition() {
+    const width = this.#element.clientWidth;
+    this.#list.style.transform = `translateX(${width * this.#currentIndex * -1}px)`;
   }
 
-  private updateImage(itemId: string) {
+  #updateImage(itemId: string) {
     // this.updateSliderPosition();
   }
 
-  private onItemsChange() {
-    this._items?.forEach((item) => {
-      const image = document.createElement("img");
-      image.src = item.src;
-      image.alt = item.alt;
+  #onItemsChange() {
+    const fragment = document.createDocumentFragment();
 
+    this.#items.forEach((item) => {
       const slide = document.createElement("div");
+      slide.innerHTML = `<img src="${item.src}" alt="${item.alt}">`;
       slide.id = `slide-${item.id}`;
       slide.classList.add("slide");
-      slide.append(image);
-
-      this.list.append(slide);
+      fragment.append(slide);
     });
+
+    this.#list.replaceChildren(fragment); // Single DOM update
   }
 
   get element(): HTMLDivElement {
-    return this._element;
+    return this.#element;
   }
 
   set items(injectedItems: ThumbnailItem[]) {
-    this._items = injectedItems;
-    this.onItemsChange();
+    this.#items = injectedItems;
+    this.#currentIndex = 0;
+    this.#onItemsChange();
   }
 }
