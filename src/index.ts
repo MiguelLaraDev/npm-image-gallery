@@ -3,16 +3,16 @@ import { Slider } from "./components/Slider";
 import { Thumbnails, type ThumbnailItem } from "./components/Thumbnails";
 
 class ImageGallery {
-  #element: HTMLElement;
+  #wrapper: HTMLElement;
   #slider = new Slider();
   #thumbs = new Thumbnails();
   #items: ThumbnailItem[] = [];
 
   constructor(selector: string, items: ThumbnailItem[]) {
-    this.#element = document.querySelector(selector) as HTMLElement;
+    this.#wrapper = document.querySelector(selector) as HTMLElement;
     this.#items = items;
 
-    if (!this.#element) {
+    if (!this.#wrapper) {
       throw new Error(`Element with selector "${selector}" not found`);
     }
 
@@ -26,7 +26,7 @@ class ImageGallery {
     container.append(this.#slider.element);
     container.append(this.#thumbs.element);
 
-    document.body.appendChild(container);
+    this.#wrapper.appendChild(container);
 
     this.#slider.items = this.#items;
     this.#thumbs.items = this.#items;
