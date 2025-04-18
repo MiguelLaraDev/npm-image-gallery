@@ -1,17 +1,6 @@
+import "../src/styles/image-gallery.css";
 import { Slider } from "./components/Slider";
 import { Thumbnails, type ThumbnailItem } from "./components/Thumbnails";
-
-export interface ThumbnailClickEvent extends CustomEvent {
-  detail: {
-    id: string;
-  };
-}
-
-export interface NavClickEvent extends CustomEvent {
-  detail: {
-    id: string;
-  };
-}
 
 class ImageGallery {
   #element: HTMLElement;
@@ -32,8 +21,7 @@ class ImageGallery {
 
   #init() {
     const container = document.createElement("div");
-    container.style.width = "100%";
-    container.style.height = "auto";
+    container.className = "image-gallery";
 
     container.append(this.#slider.element);
     container.append(this.#thumbs.element);

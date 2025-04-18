@@ -1,4 +1,4 @@
-import type { ThumbnailClickEvent } from "..";
+import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import "../styles/thumbnails.css";
 
 interface ThumbnailsProps {
@@ -38,14 +38,12 @@ export class Thumbnails {
     this.#element.className = "thumbnail-container";
 
     this.#stylesheet = new CSSStyleSheet();
-    this.#props = {
-      ...defaultProps,
-      ...props,
-    };
+    this.#props = { ...defaultProps, ...props };
 
     document.addEventListener("navClick", (e: Event) => {
-      const event = e as ThumbnailClickEvent;
-      this.#handleThumbClick(event.detail.id);
+      const event = e as NavClickEvent;
+      const { id, index } = event.detail.item;
+      this.#handleThumbClick(id, index);
     });
 
     this.#init();
@@ -76,7 +74,7 @@ export class Thumbnails {
       thumb.id = item.id;
       thumb.classList.add("thumb", "custom-thumb");
       thumb.append(image);
-      thumb.addEventListener("click", () => this.#handleThumbClick(item.id));
+      thumb.addEventListener("click", () => this.#handleThumbClick(item.id, index));
 
       if (index === 0) thumb.classList.add("selected");
 
@@ -84,7 +82,7 @@ export class Thumbnails {
     });
   }
 
-  #handleThumbClick(nextSelected: string) {
+  #handleThumbClick(nextSelected: string, index: number) {
     const current = this.#element.querySelector(".selected");
     current?.classList.remove("selected");
 
@@ -92,7 +90,7 @@ export class Thumbnails {
     next?.classList.add("selected");
 
     const event: ThumbnailClickEvent = new CustomEvent("thumbnailClick", {
-      detail: { id: nextSelected },
+      detail: { item: { id: nextSelected, index } },
       bubbles: true,
     });
 

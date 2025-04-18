@@ -1,6 +1,6 @@
-import type { NavClickEvent, ThumbnailClickEvent } from "..";
 import chevronLeft from "../assets/chevron-left.svg?raw";
 import chevronRight from "../assets/chevron-right.svg?raw";
+import type { ThumbnailClickEvent, NavClickEvent } from "../events";
 import "../styles/slider.css";
 import type { ThumbnailItem } from "./Thumbnails";
 
@@ -27,7 +27,8 @@ export class Slider {
 
     document.addEventListener("thumbnailClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;
-      this.#updateImage(event.detail.id);
+      const { index } = event.detail.item;
+      this.#updateImage(index);
     });
   }
 
@@ -58,7 +59,12 @@ export class Slider {
     if (!this.#items.length) return;
 
     const event: NavClickEvent = new CustomEvent("navClick", {
-      detail: { id: this.#items[this.#currentIndex].id },
+      detail: {
+        item: {
+          id: this.#items[this.#currentIndex].id,
+          index: this.#currentIndex,
+        },
+      },
       bubbles: true,
     });
 
@@ -70,8 +76,9 @@ export class Slider {
     this.#list.style.transform = `translateX(${width * this.#currentIndex * -1}px)`;
   }
 
-  #updateImage(itemId: string) {
-    // this.updateSliderPosition();
+  #updateImage(index: number) {
+    this.#currentIndex = index;
+    this.#updateSliderPosition();
   }
 
   #onItemsChange() {
