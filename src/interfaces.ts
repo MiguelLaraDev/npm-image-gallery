@@ -1,11 +1,18 @@
-export interface ThumbnailsProps {
-  thumbs: {
-    borderColor?: string;
-    borderWidth?: string;
-    width?: number;
-    height?: number;
-    useBorder?: boolean;
-  };
+export interface Options {
+  thumbs: ThumbnailsOptions;
+  slider: SliderOptions;
+}
+
+export interface ThumbnailsOptions {
+  borderColor?: string;
+  borderWidth?: string;
+  width?: number;
+  height?: number;
+  useBorder?: boolean;
+}
+
+export interface SliderOptions {
+  //
 }
 
 export type ThumbnailItem = {

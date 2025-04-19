@@ -1,29 +1,29 @@
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
-import type { ThumbnailItem, ThumbnailsProps } from "../interfaces";
+import type { ThumbnailItem, ThumbnailsOptions } from "../interfaces";
 import "../styles/thumbnails.css";
 
-const defaultProps: ThumbnailsProps = {
-  thumbs: {
-    borderColor: "grey",
-    borderWidth: "1px",
-    width: 100,
-    height: 100,
-    useBorder: true,
-  },
+const defaultOptions: ThumbnailsOptions = {
+  borderColor: "grey",
+  borderWidth: "1px",
+  width: 100,
+  height: 100,
+  useBorder: true,
 };
 
 export class Thumbnails {
   #element: HTMLDivElement;
   #items: ThumbnailItem[] = [];
-  #props: ThumbnailsProps;
+  #options: ThumbnailsOptions;
   #stylesheet: CSSStyleSheet;
 
-  constructor(props?: ThumbnailsProps) {
+  constructor(options?: ThumbnailsOptions) {
     this.#element = document.createElement("div");
     this.#element.className = "thumbnail-container";
 
     this.#stylesheet = new CSSStyleSheet();
-    this.#props = { ...defaultProps, ...props };
+    this.#options = { ...defaultOptions, ...options };
+
+    console.log(this.#options);
 
     document.addEventListener("navClick", (e: Event) => {
       const event = e as NavClickEvent;
@@ -35,7 +35,7 @@ export class Thumbnails {
   }
 
   async #init() {
-    const { width, height, useBorder, borderWidth, borderColor } = this.#props.thumbs;
+    const { width, height, useBorder, borderWidth, borderColor } = this.#options;
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
     await this.#stylesheet.replace(`
@@ -52,7 +52,7 @@ export class Thumbnails {
   #onItemsChange() {
     this.#element.innerHTML = "";
 
-    const { width, height } = this.#props.thumbs;
+    const { width, height } = this.#options;
 
     this.#items.forEach((item, index) => {
       const thumb = document.createElement("div");

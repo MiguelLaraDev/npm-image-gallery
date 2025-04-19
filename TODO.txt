@@ -1,7 +1,5 @@
 
-Responsive.
-
-Try applying styles from outside.
+Apply options to slider.
 
 Add a large image.
 

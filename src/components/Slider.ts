@@ -1,7 +1,7 @@
 import chevronLeft from "../assets/chevron-left.svg?raw";
 import chevronRight from "../assets/chevron-right.svg?raw";
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
-import type { ThumbnailItem } from "../interfaces";
+import type { SliderOptions, ThumbnailItem } from "../interfaces";
 import "../styles/slider.css";
 
 export class Slider {
@@ -10,9 +10,11 @@ export class Slider {
   #items: ThumbnailItem[] = [];
   #list: HTMLDivElement;
 
-  constructor() {
+  constructor(options?: SliderOptions) {
     this.#element = document.createElement("div");
     this.#list = document.createElement("div");
+
+    // TODO: Use the options.
 
     this.#init();
   }
