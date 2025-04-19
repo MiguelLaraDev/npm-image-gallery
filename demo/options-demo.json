@@ -6,5 +6,7 @@
     "height": 80,
     "useBorder": true
   },
-  "slider": {}
+  "slider": {
+    "mainColor": "red"
+  }
 }

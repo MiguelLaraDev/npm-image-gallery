@@ -1,7 +1,4 @@
 
-Apply options to slider.
-
-Add a large image.
 
 Export and upload the npm package.
 

@@ -14,16 +14,11 @@ export class Thumbnails {
   #element: HTMLDivElement;
   #items: ThumbnailItem[] = [];
   #options: ThumbnailsOptions;
-  #stylesheet: CSSStyleSheet;
 
   constructor(options?: ThumbnailsOptions) {
     this.#element = document.createElement("div");
     this.#element.className = "thumbnail-container";
-
-    this.#stylesheet = new CSSStyleSheet();
     this.#options = { ...defaultOptions, ...options };
-
-    console.log(this.#options);
 
     document.addEventListener("navClick", (e: Event) => {
       const event = e as NavClickEvent;
@@ -35,18 +30,22 @@ export class Thumbnails {
   }
 
   async #init() {
+    const stylesheet = new CSSStyleSheet();
     const { width, height, useBorder, borderWidth, borderColor } = this.#options;
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
-    await this.#stylesheet.replace(`
+    await stylesheet.replace(`
       .custom-thumb {
         border: ${border};
         width: ${width}px;
         height: ${height}px;
       }
+      .selected {
+        border-top: 4px solid ${borderColor} !important;
+      }
     `);
 
-    document.adoptedStyleSheets = [...document.adoptedStyleSheets, this.#stylesheet];
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
   }
 
   #onItemsChange() {

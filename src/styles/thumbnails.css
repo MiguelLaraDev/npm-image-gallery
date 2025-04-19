@@ -21,7 +21,3 @@
   height: inherit;
   object-fit: cover;
 }
-
-.selected {
-  border-top: 4px solid rgb(238, 130, 238) !important;
-}

@@ -4,34 +4,51 @@ import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import type { SliderOptions, ThumbnailItem } from "../interfaces";
 import "../styles/slider.css";
 
+const defaultOptions: SliderOptions = {
+  mainColor: "grey",
+};
+
 export class Slider {
   #currentIndex = 0;
   #element: HTMLDivElement;
   #items: ThumbnailItem[] = [];
   #list: HTMLDivElement;
+  #options: SliderOptions;
 
   constructor(options?: SliderOptions) {
     this.#element = document.createElement("div");
     this.#list = document.createElement("div");
-
-    // TODO: Use the options.
+    this.#options = { ...defaultOptions, ...options };
 
     this.#init();
   }
 
   #init() {
     this.#element.classList.add("slider");
-
     this.#list.classList.add("list");
     this.#element.append(this.#list);
 
     this.#addNavigation();
+
+    this.#applyOptions();
 
     document.addEventListener("thumbnailClick", (e: Event) => {
       const event = e as ThumbnailClickEvent;
       const { index } = event.detail.item;
       this.#updateImage(index);
     });
+  }
+
+  async #applyOptions() {
+    const stylesheet = new CSSStyleSheet();
+
+    await stylesheet.replace(`
+      .nav {
+        background-color: ${this.#options.mainColor};
+      }
+    `);
+
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
   }
 
   #addNavigation() {

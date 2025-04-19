@@ -12,7 +12,7 @@ export interface ThumbnailsOptions {
 }
 
 export interface SliderOptions {
-  //
+  mainColor?: string;
 }
 
 export type ThumbnailItem = {
