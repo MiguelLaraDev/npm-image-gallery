@@ -33,20 +33,24 @@
 }
 
 .slide img {
-  height: 100%;
+  width: 100%;
+  height: auto;
   margin: 16px;
 }
 
 .nav {
   position: absolute;
-  background-color: rgba(238, 130, 238, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(238, 130, 238, 0.75);
   color: black;
   top: calc(50% - 28px);
-  width: 56px;
-  height: 56px;
+  width: 32px;
+  height: 32px;
   border-radius: 100%;
   border: none;
-  margin: 16px;
+  margin: 0;
   z-index: 99;
 }
 
@@ -56,4 +60,21 @@
 
 .right {
   right: 0;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    margin: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .slide {
+    padding: 24px;
+  }
+
+  .slide img {
+    width: auto;
+    height: 100%;
+  }
 }

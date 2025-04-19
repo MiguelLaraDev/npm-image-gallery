@@ -1,21 +1,6 @@
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
+import type { ThumbnailItem, ThumbnailsProps } from "../interfaces";
 import "../styles/thumbnails.css";
-
-interface ThumbnailsProps {
-  thumbs: {
-    borderColor?: string;
-    borderWidth?: string;
-    width?: number;
-    height?: number;
-    useBorder?: boolean;
-  };
-}
-
-export type ThumbnailItem = {
-  id: string;
-  alt: string;
-  src: string;
-};
 
 const defaultProps: ThumbnailsProps = {
   thumbs: {
@@ -66,14 +51,14 @@ export class Thumbnails {
 
   #onItemsChange() {
     this.#element.innerHTML = "";
-    this.#items.forEach((item, index) => {
-      const image = document.createElement("img");
-      image.src = item.src;
 
+    const { width, height } = this.#props.thumbs;
+
+    this.#items.forEach((item, index) => {
       const thumb = document.createElement("div");
       thumb.id = item.id;
       thumb.classList.add("thumb", "custom-thumb");
-      thumb.append(image);
+      thumb.innerHTML = `<img src="${item.sizes.thumbnail}" alt="${item.alt}" width="${width}" height="${height}">`;
       thumb.addEventListener("click", () => this.#handleThumbClick(item.id, index));
 
       if (index === 0) thumb.classList.add("selected");

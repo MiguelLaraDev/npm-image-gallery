@@ -1,8 +1,8 @@
 import chevronLeft from "../assets/chevron-left.svg?raw";
 import chevronRight from "../assets/chevron-right.svg?raw";
-import type { ThumbnailClickEvent, NavClickEvent } from "../events";
+import type { NavClickEvent, ThumbnailClickEvent } from "../events";
+import type { ThumbnailItem } from "../interfaces";
 import "../styles/slider.css";
-import type { ThumbnailItem } from "./Thumbnails";
 
 export class Slider {
   #currentIndex = 0;
@@ -86,7 +86,7 @@ export class Slider {
 
     this.#items.forEach((item) => {
       const slide = document.createElement("div");
-      slide.innerHTML = `<img src="${item.src}" alt="${item.alt}">`;
+      slide.innerHTML = `<img src="${item.sizes.large}" alt="${item.alt}">`;
       slide.id = `slide-${item.id}`;
       slide.classList.add("slide");
       fragment.append(slide);

@@ -1,10 +1,9 @@
 
+Responsive.
 
 Try applying styles from outside.
 
 Add a large image.
-
-Adapt to mobile.
 
 Export and upload the npm package.
 

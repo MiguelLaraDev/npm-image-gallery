@@ -1,6 +1,7 @@
 import "../src/styles/image-gallery.css";
 import { Slider } from "./components/Slider";
-import { Thumbnails, type ThumbnailItem } from "./components/Thumbnails";
+import { Thumbnails } from "./components/Thumbnails";
+import type { ThumbnailItem } from "./interfaces";
 
 class ImageGallery {
   #wrapper: HTMLElement;
