@@ -1,7 +1,7 @@
 {
-  "name": "mldev-image-gallery",
+  "name": "mlaradev-image-gallery",
   "version": "1.0.0",
-  "description": "",
+  "description": "An image gallery made with vanilla JS + TS. Only for personal exercising purposes.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,13 +10,18 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "build": "tsc",
+    "build": "vite build && tsc",
     "watch": "tsc -w",
     "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "gallery",
+    "image",
+    "component"
+  ],
+  "author": "M. Lara Dev.",
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.1",
