@@ -1,0 +1,100 @@
+import chevronLeft from "../assets/chevron-left.svg?raw";
+import chevronRight from "../assets/chevron-right.svg?raw";
+import "../styles/slider.css";
+const defaultOptions = {
+    mainColor: "grey",
+};
+export class Slider {
+    #currentIndex = 0;
+    #element;
+    #items = [];
+    #list;
+    #options;
+    constructor(options) {
+        this.#element = document.createElement("div");
+        this.#list = document.createElement("div");
+        this.#options = { ...defaultOptions, ...options };
+        this.#init();
+    }
+    #init() {
+        this.#element.classList.add("slider");
+        this.#list.classList.add("list");
+        this.#element.append(this.#list);
+        this.#addNavigation();
+        this.#applyOptions();
+        document.addEventListener("thumbnailClick", (e) => {
+            const event = e;
+            const { index } = event.detail.item;
+            this.#updateImage(index);
+        });
+    }
+    async #applyOptions() {
+        const stylesheet = new CSSStyleSheet();
+        await stylesheet.replace(`
+      .nav {
+        background-color: ${this.#options.mainColor};
+      }
+    `);
+        document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
+    }
+    #addNavigation() {
+        const left = document.createElement("button");
+        left.classList.add("nav", "left");
+        left.innerHTML = chevronLeft;
+        left.addEventListener("click", () => this.#handleNavClick("left"));
+        const right = document.createElement("button");
+        right.classList.add("nav", "right");
+        right.innerHTML = chevronRight;
+        right.addEventListener("click", () => this.#handleNavClick("right"));
+        this.#element.append(left);
+        this.#element.append(right);
+    }
+    #handleNavClick(direction) {
+        this.#currentIndex += direction === "right" ? 1 : -1;
+        this.#currentIndex = (this.#currentIndex + this.#items.length) % this.#items.length;
+        this.#updateSliderPosition();
+        this.#dispatchNavEvent();
+    }
+    #dispatchNavEvent() {
+        if (!this.#items.length)
+            return;
+        const event = new CustomEvent("navClick", {
+            detail: {
+                item: {
+                    id: this.#items[this.#currentIndex].id,
+                    index: this.#currentIndex,
+                },
+            },
+            bubbles: true,
+        });
+        document.dispatchEvent(event);
+    }
+    #updateSliderPosition() {
+        const width = this.#element.clientWidth;
+        this.#list.style.transform = `translateX(${width * this.#currentIndex * -1}px)`;
+    }
+    #updateImage(index) {
+        this.#currentIndex = index;
+        this.#updateSliderPosition();
+    }
+    #onItemsChange() {
+        const fragment = document.createDocumentFragment();
+        this.#items.forEach((item) => {
+            const slide = document.createElement("div");
+            slide.innerHTML = `<img src="${item.sizes.large}" alt="${item.alt}">`;
+            slide.id = `slide-${item.id}`;
+            slide.classList.add("slide");
+            fragment.append(slide);
+        });
+        this.#list.replaceChildren(fragment); // Single DOM update
+    }
+    get element() {
+        return this.#element;
+    }
+    set items(injectedItems) {
+        this.#items = injectedItems;
+        this.#currentIndex = 0;
+        this.#onItemsChange();
+    }
+}
+//# sourceMappingURL=Slider.js.map
