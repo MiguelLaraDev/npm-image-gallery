@@ -1,7 +1,8 @@
 
 
-Export and upload the npm package.
 
-Update the readme.
+Finish the project readme. 
+
+Add readme to the NPM library.
 
 Install from npm into a fresh project.
