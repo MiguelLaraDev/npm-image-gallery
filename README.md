@@ -25,7 +25,44 @@ npm install mlaradev-image-gallery
 ```
 
 ## Basic usage:
-TODO: Add an example here.
+```bach
+```
 
 ## Configuration:
-TODO: Explain the availabler options.
+### Options example:
+```bash
+{
+  "thumbs": {
+    "borderColor": "red",
+    "borderWidth": "2px",
+    "width": 80,
+    "height": 80,
+    "useBorder": true
+  },
+  "slider": {
+    "mainColor": "red"
+  }
+}
+```
+
+### Items list example:
+```bash
+[
+  {
+    "id": "pic-1",
+    "alt": "Example pic",
+    "sizes": {
+      "thumbnail": "https://example.com/thumb/thumb110x110/pics/prod/428224.webp",
+      "large": "https://example.com/large/padthumb600x600/pics/bdb/_42/428224/17105803_800.jpg"
+    }
+  },
+  {
+    "id": "pic-2",
+    "alt": "Example pic",
+    "sizes": {
+      "thumbnail": "https://example.com/thumb/thumb110x110/pics/bdb/_42/428224/17111548_800.jpg",
+      "large": "https://example.com/large/padthumb600x600/pics/bdb/_42/428224/17111548_800.jpg"
+    }
+  },
+]
+```
