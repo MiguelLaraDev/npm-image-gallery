@@ -1,8 +1,2 @@
 
-
-
-Finish the project readme. 
-
-Add readme to the NPM library.
-
-Install from npm into a fresh project.
+BUG: The bundled lib doesn't recognize the styles.
