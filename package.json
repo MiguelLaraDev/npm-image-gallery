@@ -1,11 +1,18 @@
 {
   "name": "mlaradev-image-gallery",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An image gallery made with vanilla JS + TS. Only for personal exercising purposes.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/mlaradev-image-gallery.umd.js",
+  "module": "./dist/mlaradev-image-gallery.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/mlaradev-image-gallery.es.js",
+      "require": "./dist/mlaradev-image-gallery.umd.js"
+    }
+  },
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
