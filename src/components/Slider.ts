@@ -1,6 +1,6 @@
 import chevronLeft from "@assets/chevron-left.svg?raw";
 import chevronRight from "@assets/chevron-right.svg?raw";
-import "@styles/slider.css";
+import css from "@styles/slider.css?inline";
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import type { SliderOptions, ThumbnailItem } from "../interfaces";
 
@@ -43,6 +43,7 @@ export class Slider {
     const stylesheet = new CSSStyleSheet();
 
     await stylesheet.replace(`
+      ${css}
       .nav {
         background-color: ${this.#options.mainColor};
       }

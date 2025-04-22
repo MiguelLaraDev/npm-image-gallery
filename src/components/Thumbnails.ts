@@ -1,4 +1,4 @@
-import "@styles/thumbnails.css";
+import css from "@styles/thumbnails.css?inline";
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import type { ThumbnailItem, ThumbnailsOptions } from "../interfaces";
 
@@ -35,6 +35,7 @@ export class Thumbnails {
     const border = useBorder ? `${borderWidth} solid ${borderColor}` : "none";
 
     await stylesheet.replace(`
+      ${css}
       .custom-thumb {
         border: ${border};
         width: ${width}px;

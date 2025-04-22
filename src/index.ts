@@ -1,4 +1,4 @@
-import "@styles/image-gallery.css";
+import css from "@styles/image-gallery.css?inline";
 import { Slider } from "./components/Slider";
 import { Thumbnails } from "./components/Thumbnails";
 import type { Options, ThumbnailItem } from "./interfaces";
@@ -22,8 +22,13 @@ class ImageGallery {
     this.#init();
   }
 
-  #init() {
+  async #init() {
+    const stylesheet = new CSSStyleSheet();
+    await stylesheet.replace(css);
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
+
     const container = document.createElement("div");
+    container.id = "mlaradev-image-gallery";
     container.className = "image-gallery";
 
     container.append(this.#slider.element);
