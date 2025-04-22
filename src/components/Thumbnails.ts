@@ -1,6 +1,6 @@
+import "@styles/thumbnails.css";
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import type { ThumbnailItem, ThumbnailsOptions } from "../interfaces";
-import "../styles/thumbnails.css";
 
 const defaultOptions: ThumbnailsOptions = {
   borderColor: "grey",

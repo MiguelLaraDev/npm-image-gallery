@@ -1,8 +1,8 @@
-import chevronLeft from "../assets/chevron-left.svg?raw";
-import chevronRight from "../assets/chevron-right.svg?raw";
+import chevronLeft from "@assets/chevron-left.svg?raw";
+import chevronRight from "@assets/chevron-right.svg?raw";
+import "@styles/slider.css";
 import type { NavClickEvent, ThumbnailClickEvent } from "../events";
 import type { SliderOptions, ThumbnailItem } from "../interfaces";
-import "../styles/slider.css";
 
 const defaultOptions: SliderOptions = {
   mainColor: "grey",

@@ -1,4 +1,4 @@
-import "../src/styles/image-gallery.css";
+import "@styles/image-gallery.css";
 import { Slider } from "./components/Slider";
 import { Thumbnails } from "./components/Thumbnails";
 import type { Options, ThumbnailItem } from "./interfaces";
