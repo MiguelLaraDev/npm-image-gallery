@@ -1,2 +1,0 @@
-
-BUG: The bundled lib doesn't recognize the styles.

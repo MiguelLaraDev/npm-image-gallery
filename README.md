@@ -25,7 +25,10 @@ npm install mlaradev-image-gallery
 ```
 
 ## Basic usage:
-```bach
+```bash
+import MlaradevImageGallery from "mlaradev-image-gallery";
+
+new MlaradevImageGallery("#my-container", items, options);
 ```
 
 ## Configuration:

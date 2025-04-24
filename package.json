@@ -1,6 +1,6 @@
 {
   "name": "mlaradev-image-gallery",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "An image gallery made with vanilla JS + TS. Only for personal exercising purposes.",
   "main": "./dist/mlaradev-image-gallery.umd.js",
   "module": "./dist/mlaradev-image-gallery.es.js",
