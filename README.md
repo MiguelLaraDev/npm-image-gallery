@@ -19,6 +19,7 @@ This project was created to review and practice my skills on Vanilla JS.
     - Focus on make the code readable, easy to understand and use modern JS.
     - Include a demo.
 
+![Alt text](./docs/Capture%20image%20gallery.gif)
 
 ## Installation
 
